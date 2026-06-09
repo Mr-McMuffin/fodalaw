@@ -1,0 +1,436 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>Foda Law — Criminal Defence · Toronto</title>
+<meta name="description" content="Foda Law. Criminal defence lawyers in Toronto. Our reputation speaks for itself." />
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Expanded:wght@500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#070707;
+  --ink-2:#0e0e0f;
+  --paper:#f3f2ee;
+  --paper-dim:#abaaa4;
+  --paper-dimmer:#6f6f69;
+  --line:rgba(243,242,238,.13);
+  --line-2:rgba(243,242,238,.28);
+  --gold:#b1925a;
+  --gold-soft:rgba(177,146,90,.5);
+  --ease:cubic-bezier(.76,0,.24,1);
+  --reveal:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%;overflow:hidden;background:var(--ink);color:var(--paper)}
+body{font-family:"Archivo",system-ui,sans-serif;font-size:16px;-webkit-font-smoothing:antialiased;cursor:none}
+::selection{background:var(--paper);color:var(--ink)}
+.exp{font-family:"Archivo Expanded","Archivo",sans-serif}
+.up{text-transform:uppercase}
+
+/* ----------  STAGE  ---------- */
+.stage{position:fixed;inset:0;height:100dvh;width:100vw;overflow:hidden;background:var(--ink)}
+
+/* ----------  ATMOSPHERE  ---------- */
+.bg{position:absolute;inset:-6%;background-size:cover;background-position:center;
+  opacity:0;transform:scale(1.12);transition:opacity 1.5s var(--ease);
+  filter:grayscale(1) contrast(1.12) brightness(.58);z-index:0}
+.bg[data-bg="home"]{filter:grayscale(1) contrast(1.06) brightness(.6)}
+.bg.on{opacity:1;animation:kenburns 30s ease-out forwards}
+@keyframes kenburns{from{transform:scale(1.16) translate(1.5%,-1%)}to{transform:scale(1) translate(-1.5%,1%)}}
+.veil{position:absolute;inset:0;z-index:1;pointer-events:none;
+  background:linear-gradient(180deg,rgba(7,7,7,.5) 0%,rgba(7,7,7,.22) 42%,rgba(7,7,7,.78) 100%),
+             linear-gradient(96deg,rgba(7,7,7,.9) 0%,rgba(7,7,7,.4) 46%,rgba(7,7,7,.04) 100%)}
+.grain{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.045;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  animation:grain 1.1s steps(3) infinite}
+@keyframes grain{0%{transform:translate(0,0)}33%{transform:translate(-4%,3%)}66%{transform:translate(3%,-2%)}100%{transform:translate(0,0)}}
+.scan{position:absolute;inset:0;z-index:2;pointer-events:none;opacity:.5;mix-blend-mode:soft-light;
+  background:repeating-linear-gradient(180deg,transparent 0 3px,rgba(0,0,0,.5) 3px 4px)}
+.vignette{position:absolute;inset:0;z-index:3;pointer-events:none;box-shadow:inset 0 0 210px 56px rgba(0,0,0,.52)}
+
+/* ----------  FRAME LINES  ---------- */
+.frame{position:absolute;inset:0;z-index:20;pointer-events:none}
+.frame .edge{position:absolute;background:var(--line)}
+.frame .top{top:92px;left:48px;right:48px;height:1px}
+.frame .bot{bottom:84px;left:48px;right:48px;height:1px}
+.frame .lv{top:92px;bottom:84px;width:1px;left:50%}
+
+/* ----------  TOP BAR  ---------- */
+header.top-bar{position:absolute;top:0;left:0;right:0;z-index:40;
+  display:flex;align-items:center;justify-content:space-between;padding:30px 48px}
+.brand{display:flex;align-items:center;gap:0;pointer-events:auto;cursor:none;position:relative}
+.brand img{height:46px;width:auto;transition:filter .5s var(--ease),transform .5s var(--ease)}
+.brand:hover img{filter:drop-shadow(0 0 14px rgba(243,242,238,.45));transform:translateX(2px)}
+.tel{pointer-events:auto;text-decoration:none;display:flex;flex-direction:column;align-items:flex-end;
+  gap:.34rem;text-align:right;cursor:none}
+.tel .txt{font-size:.55rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);transition:opacity .4s;opacity:.85}
+.tel .num{font-family:"Archivo Expanded",sans-serif;font-weight:600;font-size:1.18rem;letter-spacing:.01em;
+  color:var(--paper);display:flex;align-items:center;gap:.55rem;transition:color .4s;line-height:1}
+.tel .ar{display:inline-block;transition:transform .4s;color:var(--gold)}
+.tel:hover .txt{opacity:1}
+.tel:hover .ar{transform:translateX(5px)}
+
+/* ----------  NAV  ---------- */
+nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bottom:30px;pointer-events:auto}
+.nav-link{background:none;border:none;color:var(--paper-dim);cursor:none;font-family:"Archivo",sans-serif;
+  font-size:.66rem;font-weight:500;letter-spacing:.24em;text-transform:uppercase;
+  padding:.55rem 0;margin-right:2.4rem;position:relative;transition:color .45s var(--ease)}
+.nav-link .idx{font-size:.58rem;color:var(--gold);opacity:.55;margin-right:.55rem;letter-spacing:.1em;transition:opacity .45s,color .45s}
+.nav-link::after{content:"";position:absolute;left:0;bottom:.2rem;height:1px;width:0;background:var(--gold);transition:width .5s var(--ease)}
+.nav-link:hover{color:var(--paper)}
+.nav-link:hover .idx{opacity:1}
+.nav-link.active{color:var(--gold)}
+.nav-link.active .idx{color:var(--gold);opacity:1}
+.nav-link.active::after{width:1.6rem}
+.pager{position:absolute;right:48px;bottom:30px;z-index:40;font-size:.66rem;letter-spacing:.2em;
+  color:var(--paper-dimmer);pointer-events:none;font-variant-numeric:tabular-nums}
+.pager b{color:var(--paper);font-weight:600}
+
+/* ----------  VIEWS  ---------- */
+.views{position:absolute;inset:0;z-index:30}
+.view{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;
+  padding:124px 48px;opacity:0;visibility:hidden;pointer-events:none;transition:opacity .65s var(--ease),visibility .65s}
+.view.active{opacity:1;visibility:visible;pointer-events:auto}
+.r{opacity:0;transform:translateY(28px);clip-path:inset(0 0 100% 0)}
+.view.active .r{animation:rise 1s var(--reveal) forwards;animation-delay:var(--d,0s)}
+@keyframes rise{to{opacity:1;transform:none;clip-path:inset(0 0 -10% 0)}}
+
+/* ----------  HOME  ---------- */
+.home-grid{display:grid;grid-template-columns:1.05fr .95fr;gap:3rem;align-items:center;height:100%}
+.kicker{display:flex;align-items:center;gap:1.1rem;margin-bottom:1.9rem}
+.kicker .ln{width:46px;height:1px;background:var(--gold)}
+.kicker span{font-size:.62rem;letter-spacing:.44em;text-transform:uppercase;color:var(--gold)}
+.hero-h{font-family:"Archivo Expanded",sans-serif;font-weight:700;text-transform:uppercase;
+  line-height:.96;letter-spacing:-.01em;font-size:clamp(2.3rem,5.1vw,5.1rem)}
+.hero-h .out{background:linear-gradient(168deg,#f6e7bf 0%,#cdaa6c 42%,#8d6f3a 60%,#ecd49a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.hero-sub{margin-top:2.1rem;max-width:42ch;color:var(--paper-dim);font-size:clamp(.92rem,1.15vw,1.05rem);line-height:1.65}
+.hero-cta{display:flex;gap:1.6rem;align-items:center;margin-top:2.8rem;flex-wrap:wrap}
+.btn{pointer-events:auto;cursor:none;text-decoration:none;border:none;background:none;font-family:"Archivo",sans-serif;
+  font-size:.64rem;letter-spacing:.26em;text-transform:uppercase;display:inline-flex;align-items:center;gap:.9rem}
+.btn-primary{color:var(--ink);background:var(--paper);padding:1.1rem 2.1rem;transition:transform .4s,box-shadow .4s,letter-spacing .4s}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 16px 40px -18px rgba(243,242,238,.5);letter-spacing:.3em}
+.btn-ghost{color:var(--paper);padding:1.1rem 0;position:relative}
+.btn-ghost .arr{display:inline-block;transition:transform .4s}
+.btn-ghost::after{content:"";position:absolute;left:0;bottom:.7rem;height:1px;width:100%;background:var(--line-2);transform:scaleX(0);transform-origin:left;transition:transform .45s var(--ease)}
+.btn-ghost:hover::after{transform:scaleX(1)}
+.btn-ghost:hover .arr{transform:translateX(6px)}
+
+/* ----------  3D LOGO MARK  ---------- */
+.mark-stage{display:flex;align-items:center;justify-content:center;perspective:1300px;height:100%}
+.mark-3d{width:min(38vh,400px);aspect-ratio:1;transform-style:preserve-3d;
+  transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .3s var(--ease);will-change:transform;cursor:none}
+.mark-float{width:100%;height:100%;animation:markFloat 10s ease-in-out infinite;transform-style:preserve-3d}
+@keyframes markFloat{0%,100%{transform:translateY(0) translateZ(20px)}50%{transform:translateY(-14px) translateZ(20px)}}
+/* turntable (Option 03) */
+.mark-spin{width:100%;height:100%;transform-style:preserve-3d;animation:markTurn 8s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes markTurn{0%{transform:rotateY(-24deg)}50%{transform:rotateY(24deg)}100%{transform:rotateY(-24deg)}}
+.mark-mark{position:relative;width:100%;height:100%;transform-style:preserve-3d}
+.mark-mark img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;mix-blend-mode:screen;display:block}
+.mark-base{clip-path:polygon(0 0,0 0,0 100%,0 100%);animation:wipe 1.15s var(--reveal) .7s forwards}
+/* symmetric backing shadow — depth without directional wedges */
+.mark-shadow{position:absolute;inset:3%;background:radial-gradient(closest-side,rgba(0,0,0,.6),rgba(0,0,0,0) 78%);
+  transform:translateZ(-80px);filter:blur(26px);pointer-events:none}
+@keyframes wipe{0%{clip-path:polygon(0 0,0 0,0 100%,0 100%)}100%{clip-path:polygon(0 0,118% 0,100% 100%,-18% 100%)}}
+/* light catch synced to the turn */
+.mark-hi{filter:brightness(1.7);pointer-events:none;
+  -webkit-mask-image:linear-gradient(100deg,transparent 34%,#000 50%,transparent 66%);
+  mask-image:linear-gradient(100deg,transparent 34%,#000 50%,transparent 66%);
+  -webkit-mask-size:210% 100%;mask-size:210% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  animation:markHi 8s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes markHi{0%{-webkit-mask-position:80% 0;mask-position:80% 0}50%{-webkit-mask-position:20% 0;mask-position:20% 0}100%{-webkit-mask-position:80% 0;mask-position:80% 0}}
+/* gold squares — tumble in 3D around the mark, sharing its perspective (no poking corners) */
+.cube{position:absolute;inset:-7%;border:1px solid var(--gold);pointer-events:none;transition:opacity .5s;transform-style:preserve-3d}
+.cube.c1{opacity:.6;animation:cubeY 15s linear infinite}
+.cube.c2{opacity:.42;animation:cubeX 21s linear infinite}
+@keyframes cubeY{from{transform:rotateY(0deg)}to{transform:rotateY(360deg)}}
+@keyframes cubeX{from{transform:rotateX(0deg)}to{transform:rotateX(360deg)}}
+.mark-stage:hover .cube{opacity:.85}
+
+/* ----------  PRACTICE  ---------- */
+.view-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:2.6rem}
+.view-title{font-family:"Archivo Expanded",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:clamp(1.7rem,3.6vw,3.1rem);line-height:1;letter-spacing:-.01em}
+.view-tag{color:var(--paper-dim);font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;text-align:right;max-width:26ch;line-height:2}
+.grid{display:grid;grid-template-columns:repeat(5,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
+.cell{background:rgba(7,7,7,.4);backdrop-filter:blur(2px);padding:1.7rem 1.5rem;min-height:158px;position:relative;overflow:hidden;transition:background .5s;cursor:none}
+.cell::before{content:"";position:absolute;left:0;top:0;height:2px;width:0;background:var(--paper);transition:width .55s var(--ease)}
+.cell:hover{background:rgba(243,242,238,.05)}
+.cell:hover::before{width:100%}
+.cell .no{font-size:.58rem;letter-spacing:.18em;color:var(--paper-dimmer);transition:color .5s}
+.cell:hover .no{color:var(--gold)}
+.cell::before{background:var(--gold)}
+.btn-ghost .arr{color:var(--gold)}
+.cell h3{font-family:"Archivo Expanded",sans-serif;font-weight:600;text-transform:uppercase;font-size:1.04rem;line-height:1.1;margin:.85rem 0 .6rem;letter-spacing:.005em}
+.cell p{color:#dcdad3;font-size:.76rem;line-height:1.62;opacity:0;transform:translateY(8px);transition:.5s var(--ease)}
+.cell:hover p{opacity:1;transform:none}
+.cell:hover{background:rgba(243,242,238,.07)}
+
+/* ----------  APPROACH  ---------- */
+.approach{display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:center}
+.approach-lead{font-family:"Archivo Expanded",sans-serif;font-weight:600;text-transform:uppercase;
+  font-size:clamp(1.5rem,2.9vw,2.6rem);line-height:1.16;letter-spacing:-.005em}
+.approach-lead .out{background:linear-gradient(168deg,#f6e7bf 0%,#cdaa6c 42%,#8d6f3a 60%,#ecd49a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.approach-body{color:var(--paper-dim);font-size:.9rem;line-height:1.85;margin-top:1.9rem;max-width:50ch}
+.pillars{display:flex;flex-direction:column}
+.pillar{display:flex;gap:1.7rem;padding:1.5rem 0;border-top:1px solid var(--line)}
+.pillar:last-child{border-bottom:1px solid var(--line)}
+.pillar .pn{font-family:"Archivo Expanded",sans-serif;font-weight:700;color:var(--gold);font-size:1.1rem;min-width:2.6rem;letter-spacing:.05em}
+.pillar h4{font-family:"Archivo Expanded",sans-serif;font-weight:700;font-size:.92rem;letter-spacing:.12em;text-transform:uppercase;margin-bottom:.5rem}
+.pillar p{color:var(--paper-dim);font-size:.8rem;line-height:1.65}
+
+/* ----------  CONTACT  ---------- */
+.contact{display:grid;grid-template-columns:1.2fr 1fr;gap:5rem;align-items:center}
+.contact-h{font-family:"Archivo Expanded",sans-serif;font-weight:700;text-transform:uppercase;
+  font-size:clamp(2rem,4.6vw,4.1rem);line-height:1;letter-spacing:-.01em}
+.contact-h .out{background:linear-gradient(168deg,#f6e7bf 0%,#cdaa6c 42%,#8d6f3a 60%,#ecd49a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.contact-sub{color:var(--paper-dim);font-size:1rem;line-height:1.7;margin-top:1.7rem;max-width:42ch}
+.contact-cta{margin-top:2.6rem}
+.dl{display:flex;flex-direction:column}
+.dl .row{display:flex;flex-direction:column;gap:.5rem;padding:1.4rem 0;border-top:1px solid var(--line)}
+.dl .row:last-child{border-bottom:1px solid var(--line)}
+.dl dt{font-size:.56rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold)}
+.dl dd a,.dl dd{color:var(--paper);text-decoration:none;font-family:"Archivo Expanded",sans-serif;font-weight:600;
+  font-size:1.12rem;letter-spacing:.005em;transition:color .4s;text-transform:uppercase}
+.dl dd a:hover{color:var(--paper-dim)}
+.dl dd.addr{font-weight:500;font-size:.98rem;line-height:1.5}
+
+/* ----------  CURSOR (diamond)  ---------- */
+.cur{position:fixed;top:0;left:0;z-index:90;width:30px;height:30px;border:1px solid rgba(243,242,238,.7);
+  pointer-events:none;transform:translate(-50%,-50%) rotate(45deg);mix-blend-mode:difference;
+  transition:width .3s var(--ease),height .3s var(--ease),background .3s,opacity .3s}
+.cur.grow{width:56px;height:56px;background:rgba(243,242,238,.1)}
+.curd{position:fixed;top:0;left:0;z-index:90;width:4px;height:4px;border-radius:50%;background:var(--paper);
+  pointer-events:none;transform:translate(-50%,-50%);mix-blend-mode:difference}
+
+/* ----------  LOADER  ---------- */
+.loader{position:fixed;inset:0;z-index:200;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-direction:column;
+  transition:opacity .9s var(--ease),visibility .9s}
+.loader.done{opacity:0;visibility:hidden}
+.loader .lwrap{position:relative;width:320px;max-width:74vw}
+.loader .lwrap img{width:100%;height:auto;display:block;
+  clip-path:polygon(0 0,0 0,0 100%,0 100%);animation:wipe 1.1s var(--reveal) .25s forwards}
+.loader .lbar{margin-top:1.2rem;width:0;height:1px;background:var(--line-2);animation:lbar 1.5s var(--ease) .5s forwards}
+.loader .ls{margin-top:.9rem;font-size:.56rem;letter-spacing:.34em;text-transform:uppercase;color:var(--gold);opacity:0;animation:lin 1s 1.2s forwards}
+.loader .lbar{background:var(--gold-soft)}
+@keyframes lin{to{opacity:1}}
+@keyframes lbar{to{width:200px}}
+
+/* ----------  RESPONSIVE  ---------- */
+@media(max-width:1080px){.mark-3d{width:min(32vh,300px)}}
+@media(max-width:980px){
+  body{cursor:auto}.cur,.curd{display:none}
+  .home-grid,.approach,.contact{grid-template-columns:1fr;gap:2.4rem}
+  .mark-stage{display:none}
+  .grid{grid-template-columns:repeat(2,1fr)}
+  .frame .top,.frame .bot,.frame .lv{display:none}
+}
+@media(max-width:640px){
+  html,body{overflow:auto}
+  .stage{position:relative;height:auto;min-height:100dvh}
+  .views{position:relative}
+  .view{position:relative;min-height:100dvh;padding:120px 22px 130px}
+  header.top-bar,nav.dock,.pager{padding-left:22px;padding-right:22px}
+  .grid{grid-template-columns:1fr}.cell p{opacity:.85;transform:none}
+  nav.dock{flex-wrap:wrap;gap:.2rem .4rem;left:22px}
+  .tel .txt{display:none}
+}
+@media(prefers-reduced-motion:reduce){*{animation-duration:.001s!important;transition-duration:.2s!important}.bg.on{animation:none;transform:scale(1)}}
+</style>
+</head>
+<body>
+
+<!-- LOADER -->
+<div class="loader" id="loader">
+  <div class="lwrap"><img src="logo_t.png" alt="Foda Law"></div>
+  <div class="lbar"></div>
+  <div class="ls">Criminal Defence · Toronto</div>
+</div>
+
+<!-- CURSOR -->
+<div class="cur" id="cur"></div>
+<div class="curd" id="curd"></div>
+
+<main class="stage">
+  <div class="bg" data-bg="home" style="background-image:url('https://images.unsplash.com/photo-1569982615761-66697da68502?auto=format&fit=crop&w=2400&q=80')"></div>
+  <div class="bg" data-bg="practice" style="background-image:url('https://images.unsplash.com/photo-1580438612620-9e3951570d24?auto=format&fit=crop&w=2200&q=80')"></div>
+  <div class="bg" data-bg="approach" style="background-image:url('https://images.unsplash.com/photo-1505664194779-8beaceb93744?auto=format&fit=crop&w=2200&q=80')"></div>
+  <div class="bg" data-bg="contact" style="background-image:url('https://images.unsplash.com/photo-1543962226-818f4301073f?auto=format&fit=crop&w=2200&q=80')"></div>
+
+  <div class="veil"></div>
+  <div class="scan"></div>
+  <div class="grain"></div>
+  <div class="vignette"></div>
+  <div class="frame"><div class="edge top"></div><div class="edge bot"></div><div class="edge lv"></div></div>
+
+  <!-- TOP BAR -->
+  <header class="top-bar">
+    <div class="brand" data-cursor data-go="home"><img src="logo_t.png" alt="Foda Law"></div>
+    <a class="tel" href="tel:+14166421438" data-cursor><span class="txt">Speak with counsel</span><span class="num">416.642.1438 <span class="ar">→</span></span></a>
+  </header>
+
+  <!-- VIEWS -->
+  <div class="views">
+
+    <!-- HOME -->
+    <section class="view active" data-view="home">
+      <div class="home-grid">
+        <div>
+          <div class="kicker r" style="--d:.05s"><span class="ln"></span><span>Criminal Lawyers · Toronto</span></div>
+          <h1 class="hero-h">
+            <span class="r" style="--d:.16s">Our reputation</span><br>
+            <span class="r out" style="--d:.28s">speaks</span> <span class="r" style="--d:.4s">for itself.</span>
+          </h1>
+          <p class="hero-sub r" style="--d:.54s">Discreet. Relentless. Prepared.</p>
+          <div class="hero-cta r" style="--d:.66s">
+            <a class="btn btn-primary" href="tel:+14166421438" data-cursor>Consultation</a>
+            <button class="btn btn-ghost" data-go="practice" data-cursor>Practice <span class="arr">→</span></button>
+          </div>
+        </div>
+
+        <!-- 3D LOGO MARK -->
+        <div class="mark-stage">
+          <div class="mark-3d" id="mark3d" data-cursor>
+            <div class="mark-float">
+              <span class="mark-shadow"></span>
+              <div class="mark-spin">
+                <span class="cube c1"></span><span class="cube c2"></span>
+                <div class="mark-mark">
+                  <img class="mark-base" src="icon.png" alt="Foda Law monogram">
+                  <img class="mark-hi" src="icon.png" alt="" aria-hidden="true">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRACTICE -->
+    <section class="view" data-view="practice">
+      <div class="view-head">
+        <h2 class="view-title r" style="--d:.05s">Practice</h2>
+        <p class="view-tag r" style="--d:.12s">First charge to appeal.</p>
+      </div>
+      <div class="grid">
+        <div class="cell r" style="--d:.14s" data-cursor><span class="no">/ 01</span><h3>Impaired & DUI</h3><p>Over 80, refusals & roadside screening. Charter challenges to the stop.</p></div>
+        <div class="cell r" style="--d:.19s" data-cursor><span class="no">/ 02</span><h3>Assault</h3><p>Assault, aggravated assault, weapons and threats — bail to trial.</p></div>
+        <div class="cell r" style="--d:.24s" data-cursor><span class="no">/ 03</span><h3>Drug Offences</h3><p>Possession, trafficking and production under the CDSA.</p></div>
+        <div class="cell r" style="--d:.29s" data-cursor><span class="no">/ 04</span><h3>Intimate Partner Violence</h3><p>Domestic assault, breaches and release conditions, handled with discretion.</p></div>
+        <div class="cell r" style="--d:.34s" data-cursor><span class="no">/ 05</span><h3>Sexual Offences</h3><p>Serious allegations met with rigorous, confidential preparation.</p></div>
+        <div class="cell r" style="--d:.39s" data-cursor><span class="no">/ 06</span><h3>Homicides</h3><p>Murder and manslaughter — the gravest charges, defended without compromise.</p></div>
+        <div class="cell r" style="--d:.44s" data-cursor><span class="no">/ 07</span><h3>Fraud</h3><p>Fraud, theft and financial crime — protecting record and reputation.</p></div>
+        <div class="cell r" style="--d:.49s" data-cursor><span class="no">/ 08</span><h3>Bail Hearings</h3><p>Urgent release, sureties and plans of supervision, day or night.</p></div>
+        <div class="cell r" style="--d:.54s" data-cursor><span class="no">/ 09</span><h3>Appeals</h3><p>Conviction and sentence appeals before the higher courts.</p></div>
+        <div class="cell r" style="--d:.59s" data-cursor><span class="no">/ 10</span><h3>Ontario Review Board</h3><p>NCR findings, fitness hearings and ORB dispositions.</p></div>
+      </div>
+    </section>
+
+    <!-- APPROACH -->
+    <section class="view" data-view="approach">
+      <div class="view-head">
+        <h2 class="view-title r" style="--d:.05s">Approach</h2>
+        <p class="view-tag r" style="--d:.12s">Fewer files. Total preparation.</p>
+      </div>
+      <div class="approach">
+        <p class="approach-lead r" style="--d:.18s">Built quietly.<br><span class="out">Argued</span> without hesitation.</p>
+        <div class="pillars">
+          <div class="pillar r" style="--d:.26s"><span class="pn">01</span><div><h4>Discretion</h4><p>Handled privately, without judgment.</p></div></div>
+          <div class="pillar r" style="--d:.34s"><span class="pn">02</span><div><h4>Tenacity</h4><p>Every file prepared for trial.</p></div></div>
+          <div class="pillar r" style="--d:.42s"><span class="pn">03</span><div><h4>Experience</h4><p>Years before Ontario's courts.</p></div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section class="view" data-view="contact">
+      <div class="contact">
+        <div>
+          <div class="kicker r" style="--d:.05s"><span class="ln"></span><span>Available 24 / 7 for arrests</span></div>
+          <h2 class="contact-h r" style="--d:.14s">Let's talk,<br><span class="out">in confidence.</span></h2>
+          <p class="contact-sub r" style="--d:.26s">Your first call is confidential.</p>
+          <div class="contact-cta r" style="--d:.36s"><a class="btn btn-primary" href="tel:+14166421438" data-cursor>Call 416.642.1438</a></div>
+        </div>
+        <dl class="dl">
+          <div class="row r" style="--d:.3s"><dt>Telephone</dt><dd><a href="tel:+14166421438" data-cursor>416.642.1438</a></dd></div>
+          <div class="row r" style="--d:.38s"><dt>Email</dt><dd><a href="mailto:info@fodalaw.com" data-cursor>info@fodalaw.com</a></dd></div>
+          <div class="row r" style="--d:.46s"><dt>Chambers</dt><dd class="addr">137 Berkeley Street<br>Toronto, Ontario M5A 2X1</dd></div>
+        </dl>
+      </div>
+    </section>
+
+  </div>
+
+  <!-- NAV -->
+  <nav class="dock">
+    <button class="nav-link active" data-go="home" data-cursor><span class="idx">01</span>Home</button>
+    <button class="nav-link" data-go="practice" data-cursor><span class="idx">02</span>Practice</button>
+    <button class="nav-link" data-go="approach" data-cursor><span class="idx">03</span>Approach</button>
+    <button class="nav-link" data-go="contact" data-cursor><span class="idx">04</span>Contact</button>
+  </nav>
+  <div class="pager"><b id="pgNow">01</b> / 04</div>
+</main>
+
+<script>
+(function(){
+  const order=["home","practice","approach","contact"];
+  const bgs=[...document.querySelectorAll(".bg")];
+  const links=[...document.querySelectorAll(".nav-link")];
+  const pg=document.getElementById("pgNow");
+  let cur="home",busy=false;
+
+  function setBg(name){bgs.forEach(b=>{const on=b.dataset.bg===name;b.classList.toggle("on",on);
+    if(on){b.style.animation="none";void b.offsetWidth;b.style.animation="";}});}
+
+  function go(name){
+    if(name===cur||busy||!order.includes(name))return;
+    busy=true;
+    document.querySelector(".view.active").classList.remove("active");
+    const inEl=document.querySelector('.view[data-view="'+name+'"]');
+    inEl.querySelectorAll(".r").forEach(el=>{el.style.animation="none";void el.offsetWidth;el.style.animation="";});
+    setTimeout(()=>{inEl.classList.add("active");busy=false;},250);
+    setBg(name);
+    links.forEach(l=>l.classList.toggle("active",l.dataset.go===name));
+    pg.textContent=String(order.indexOf(name)+1).padStart(2,"0");
+    cur=name;
+  }
+  document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>go(b.dataset.go)));
+
+  window.addEventListener("keydown",e=>{const i=order.indexOf(cur);
+    if(e.key==="ArrowRight"||e.key==="ArrowDown")go(order[(i+1)%order.length]);
+    if(e.key==="ArrowLeft"||e.key==="ArrowUp")go(order[(i-1+order.length)%order.length]);});
+  let wlock=false;
+  window.addEventListener("wheel",e=>{if(window.innerWidth<641)return;
+    if(wlock||Math.abs(e.deltaY)<18)return;wlock=true;setTimeout(()=>wlock=false,900);
+    const i=order.indexOf(cur);go(order[Math.min(order.length-1,Math.max(0,i+(e.deltaY>0?1:-1)))]);},{passive:true});
+
+  // cursor
+  const cur1=document.getElementById("cur"),curd=document.getElementById("curd");
+  let tx=0,ty=0,cx=0,cy=0;
+  window.addEventListener("mousemove",e=>{tx=e.clientX;ty=e.clientY;curd.style.transform=`translate(${tx}px,${ty}px) translate(-50%,-50%)`;});
+  (function loop(){cx+=(tx-cx)*.2;cy+=(ty-cy)*.2;cur1.style.transform=`translate(${cx}px,${cy}px) translate(-50%,-50%) rotate(45deg)`;requestAnimationFrame(loop);})();
+  document.querySelectorAll("[data-cursor]").forEach(el=>{
+    el.addEventListener("mouseenter",()=>cur1.classList.add("grow"));
+    el.addEventListener("mouseleave",()=>cur1.classList.remove("grow"));});
+
+  // 3D logo tilt
+  const m=document.getElementById("mark3d");let rxT=0,ryT=0,rxC=0,ryC=0,over=false;
+  if(m){
+    m.addEventListener("mouseenter",()=>over=true);
+    m.addEventListener("mouseleave",()=>over=false);
+    window.addEventListener("mousemove",e=>{const nx=e.clientX/window.innerWidth-.5,ny=e.clientY/window.innerHeight-.5;
+      const amp=over?30:11;ryT=nx*amp;rxT=-ny*amp;});
+    (function tilt(){
+      ryC+=(ryT-ryC)*.08;rxC+=(rxT-rxC)*.08;
+      m.style.setProperty("--rx",rxC.toFixed(2)+"deg");m.style.setProperty("--ry",ryC.toFixed(2)+"deg");
+      requestAnimationFrame(tilt);})();
+  }
+
+  bgs.forEach(b=>{const u=b.style.backgroundImage.slice(5,-2);const img=new Image();img.onerror=()=>b.style.backgroundImage="none";img.src=u;});
+  window.addEventListener("load",()=>setTimeout(()=>{document.getElementById("loader").classList.add("done");setBg("home");},1700));
+  setTimeout(()=>setBg("home"),1900);
+})();
+</script>
+</body>
+</html>

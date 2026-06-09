@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Foda Law — Logo Animation Options</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600&family=Archivo+Expanded:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#070707;--ink-2:#0e0e0f;--paper:#f3f2ee;--paper-dim:#8a8a86;--paper-dimmer:#54544f;
+  --line:rgba(243,242,238,.13);--gold:#b1925a;--gold-soft:rgba(177,146,90,.5);
+  --ease:cubic-bezier(.76,0,.24,1);--reveal:cubic-bezier(.16,1,.3,1);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--ink);color:var(--paper);font-family:"Archivo",sans-serif;-webkit-font-smoothing:antialiased;min-height:100vh}
+.exp{font-family:"Archivo Expanded",sans-serif}
+.grain{position:fixed;inset:0;z-index:1;pointer-events:none;opacity:.05;mix-blend-mode:overlay;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.page-head{position:relative;z-index:2;padding:54px 48px 26px;display:flex;justify-content:space-between;align-items:flex-end;gap:2rem;flex-wrap:wrap;border-bottom:1px solid var(--line)}
+.page-head h1{font-family:"Archivo Expanded",sans-serif;font-weight:700;text-transform:uppercase;font-size:clamp(1.4rem,2.6vw,2.1rem);letter-spacing:-.01em;line-height:1}
+.page-head .k{color:var(--gold);font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;margin-bottom:.9rem;display:block}
+.page-head p{color:var(--paper-dim);font-size:.82rem;line-height:1.7;max-width:40ch}
+.page-head a.live{color:var(--paper);text-decoration:none;font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;border:1px solid var(--line);padding:.85rem 1.4rem;transition:border-color .4s,color .4s}
+.page-head a.live:hover{border-color:var(--gold);color:var(--gold)}
+
+.grid{position:relative;z-index:2;display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line)}
+.tile{background:var(--ink);position:relative;min-height:48vh;display:flex;flex-direction:column;overflow:hidden}
+.tile-bg{position:absolute;inset:0;background-size:cover;background-position:center;filter:grayscale(1) contrast(1.15) brightness(.36);opacity:.5}
+.tile-veil{position:absolute;inset:0;background:radial-gradient(120% 90% at 50% 40%,rgba(7,7,7,.4),rgba(7,7,7,.92))}
+.tile-label{position:absolute;top:22px;left:24px;z-index:5}
+.tile-label .n{color:var(--gold);font-size:.58rem;letter-spacing:.34em;text-transform:uppercase}
+.tile-label .t{font-family:"Archivo Expanded",sans-serif;font-weight:600;text-transform:uppercase;font-size:1rem;letter-spacing:.02em;margin-top:.4rem}
+.tile-label .d{color:var(--paper-dim);font-size:.68rem;line-height:1.5;margin-top:.45rem;max-width:26ch}
+.fs{position:absolute;bottom:20px;left:24px;z-index:5;background:none;border:1px solid var(--line);color:var(--paper-dim);
+  font-family:"Archivo",sans-serif;font-size:.55rem;letter-spacing:.22em;text-transform:uppercase;padding:.6rem 1rem;cursor:pointer;transition:.4s}
+.fs:hover{border-color:var(--gold);color:var(--gold)}
+.pick{position:absolute;bottom:20px;right:24px;z-index:5;color:var(--paper-dimmer);font-size:.55rem;letter-spacing:.2em;text-transform:uppercase}
+
+/* mark base */
+.stage{flex:1;display:flex;align-items:center;justify-content:center;perspective:1200px;position:relative;z-index:4}
+.mk{width:min(30vh,210px);aspect-ratio:1;position:relative;transform-style:preserve-3d}
+.mk img{position:absolute;inset:0;width:100%;height:100%;object-fit:contain;mix-blend-mode:screen;display:block}
+.mk .base{filter:drop-shadow(0 22px 40px rgba(0,0,0,.7))}
+
+/* ---------- OPT 1 · PLAQUE GLEAM ---------- */
+.o1 .mk{animation:o1breathe 7s ease-in-out infinite}
+@keyframes o1breathe{0%,100%{transform:translateZ(0) scale(1)}50%{transform:translateZ(0) scale(1.014)}}
+.o1 .gleam{filter:brightness(0) saturate(0);} /* hidden base for mask layer */
+.o1 .sheen{filter:brightness(2.4);
+  -webkit-mask-image:linear-gradient(118deg,transparent 42%,#000 50%,transparent 58%);mask-image:linear-gradient(118deg,transparent 42%,#000 50%,transparent 58%);
+  -webkit-mask-size:300% 100%;mask-size:300% 100%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;
+  animation:o1sheen 4.6s ease-in-out infinite}
+.o1 .gold-sheen{mix-blend-mode:screen;opacity:.5;background:linear-gradient(118deg,transparent 44%,var(--gold) 50%,transparent 56%);}
+@keyframes o1sheen{0%{-webkit-mask-position:140% 0;mask-position:140% 0;opacity:0}30%{opacity:1}50%{-webkit-mask-position:-40% 0;mask-position:-40% 0;opacity:1}62%{opacity:0}100%{-webkit-mask-position:-40% 0;mask-position:-40% 0;opacity:0}}
+
+/* ---------- OPT 2 · PARALLAX DEPTH ---------- */
+.o2 .mk{transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .3s var(--ease)}
+.o2 .float{position:absolute;inset:0;animation:o2float 9s ease-in-out infinite;transform-style:preserve-3d}
+@keyframes o2float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+.o2 .frame{position:absolute;inset:-12%;border:1px solid var(--gold);opacity:0;transform:translateZ(-30px);animation:o2frame 1s var(--reveal) .5s forwards}
+@keyframes o2frame{to{opacity:.4}}
+
+/* ---------- OPT 3 · TURNTABLE ---------- */
+.o3 .mk{animation:o3turn 7.5s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes o3turn{0%{transform:rotateY(-30deg)}50%{transform:rotateY(30deg)}100%{transform:rotateY(-30deg)}}
+.o3 .hi{mix-blend-mode:screen;opacity:.55;filter:brightness(1.6);
+  -webkit-mask-image:linear-gradient(100deg,transparent 35%,#000 50%,transparent 65%);mask-image:linear-gradient(100deg,transparent 35%,#000 50%,transparent 65%);
+  -webkit-mask-size:200% 100%;mask-size:200% 100%;animation:o3hi 7.5s cubic-bezier(.45,0,.55,1) infinite}
+@keyframes o3hi{0%{-webkit-mask-position:80% 0;mask-position:80% 0}50%{-webkit-mask-position:20% 0;mask-position:20% 0}100%{-webkit-mask-position:80% 0;mask-position:80% 0}}
+
+/* ---------- OPT 4 · ETCH / DRAW ---------- */
+.o4 .base{clip-path:inset(0 100% 0 0);animation:o4wipe 4.4s var(--ease) infinite}
+@keyframes o4wipe{0%{clip-path:inset(0 100% 0 0)}28%{clip-path:inset(0 0 0 0)}82%{clip-path:inset(0 0 0 0);opacity:1}96%{clip-path:inset(0 0 0 0);opacity:0}100%{clip-path:inset(0 100% 0 0);opacity:0}}
+.o4 .edge{position:absolute;top:-4%;bottom:-4%;width:14%;background:linear-gradient(90deg,transparent,var(--gold),transparent);
+  mix-blend-mode:screen;left:-14%;animation:o4edge 4.4s var(--ease) infinite;opacity:0;filter:blur(2px)}
+@keyframes o4edge{0%{left:-14%;opacity:0}4%{opacity:.9}28%{left:96%;opacity:.9}34%{opacity:0}100%{opacity:0}}
+
+/* ---------- OPT 5 · SPOTLIGHT ---------- */
+.o5 .base{filter:brightness(.32) drop-shadow(0 22px 40px rgba(0,0,0,.7))}
+.o5 .lit{filter:brightness(1.25);
+  -webkit-mask-image:radial-gradient(circle at center,#000 0%,#000 22%,transparent 46%);mask-image:radial-gradient(circle at center,#000 0%,#000 22%,transparent 46%);
+  -webkit-mask-size:140% 140%;mask-size:140% 140%;-webkit-mask-repeat:no-repeat;mask-repeat:no-repeat;animation:o5spot 6.5s ease-in-out infinite}
+@keyframes o5spot{0%{-webkit-mask-position:14% 30%;mask-position:14% 30%}25%{-webkit-mask-position:80% 18%;mask-position:80% 18%}50%{-webkit-mask-position:64% 82%;mask-position:64% 82%}75%{-webkit-mask-position:20% 70%;mask-position:20% 70%}100%{-webkit-mask-position:14% 30%;mask-position:14% 30%}}
+.o5 .glow{pointer-events:none;mix-blend-mode:screen;background:radial-gradient(circle 70px at 50% 50%,var(--gold-soft),transparent 70%);opacity:.5;animation:o5glow 6.5s ease-in-out infinite}
+@keyframes o5glow{0%{transform:translate(-30%,-22%)}25%{transform:translate(30%,-34%)}50%{transform:translate(16%,32%)}75%{transform:translate(-28%,18%)}100%{transform:translate(-30%,-22%)}}
+
+@media(max-width:1000px){.grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:640px){.grid{grid-template-columns:1fr}.page-head{padding:40px 22px 22px}}
+:fullscreen .tile-label .d,:fullscreen .fs{opacity:.0}
+.tile:fullscreen{min-height:100vh}
+.tile:fullscreen .mk{width:min(46vh,440px)}
+.tile:fullscreen .tile-bg{opacity:.6}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<header class="page-head">
+  <div>
+    <span class="k">Foda Law · Hero Logo</span>
+    <h1>Five Animation Directions</h1>
+  </div>
+  <div>
+    <p>Each tile animates the live FZ mark in a different, professional register. Hover Option 02 for parallax. Click <em>Fullscreen</em> to judge it large. Tell me the number and I'll set it on the homepage.</p>
+  </div>
+  <a class="live" href="index.html">View live site →</a>
+</header>
+
+<main class="grid" id="grid">
+
+  <!-- 1 -->
+  <section class="tile o1" style="--bg:url('https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1100&q=70')">
+    <div class="tile-bg"></div><div class="tile-veil"></div>
+    <div class="tile-label"><div class="n">Option 01</div><div class="t">Brass Plaque</div><div class="d">Still and authoritative. A single light gleams across the mark — like a polished nameplate.</div></div>
+    <div class="stage"><div class="mk">
+      <img class="base" src="icon.png" alt="">
+      <img class="sheen" src="icon.png" alt="">
+    </div></div>
+    <button class="fs">⤢ Fullscreen</button><span class="pick">Restrained</span>
+  </section>
+
+  <!-- 2 -->
+  <section class="tile o2" style="--bg:url('https://images.unsplash.com/photo-1543962226-818f4301073f?auto=format&fit=crop&w=1100&q=70')">
+    <div class="tile-bg"></div><div class="tile-veil"></div>
+    <div class="tile-label"><div class="n">Option 02</div><div class="t">Parallax Depth</div><div class="d">Floats in real 3D and leans toward the cursor. Confident, tactile, modern. (Hover me.)</div></div>
+    <div class="stage"><div class="mk"><div class="float">
+      <span class="frame"></span>
+      <img class="base" src="icon.png" alt="">
+    </div></div></div>
+    <button class="fs">⤢ Fullscreen</button><span class="pick">Interactive</span>
+  </section>
+
+  <!-- 3 -->
+  <section class="tile o3" style="--bg:url('https://images.unsplash.com/photo-1559344404-d3d24a7480e4?auto=format&fit=crop&w=1100&q=70')">
+    <div class="tile-bg"></div><div class="tile-veil"></div>
+    <div class="tile-label"><div class="n">Option 03</div><div class="t">Turntable</div><div class="d">Rotates slowly on its axis, catching light as it turns — like a struck medallion.</div></div>
+    <div class="stage"><div class="mk">
+      <img class="base" src="icon.png" alt="">
+      <img class="hi" src="icon.png" alt="">
+    </div></div>
+    <button class="fs">⤢ Fullscreen</button><span class="pick">Premium</span>
+  </section>
+
+  <!-- 4 -->
+  <section class="tile o4" style="--bg:url('https://images.unsplash.com/photo-1507669370444-19f0836d34cf?auto=format&fit=crop&w=1100&q=70')">
+    <div class="tile-bg"></div><div class="tile-veil"></div>
+    <div class="tile-label"><div class="n">Option 04</div><div class="t">Engrave</div><div class="d">The mark is etched in by a travelling gold edge, holds, then redraws. Architectural.</div></div>
+    <div class="stage"><div class="mk">
+      <img class="base" src="icon.png" alt="">
+      <div class="edge"></div>
+    </div></div>
+    <button class="fs">⤢ Fullscreen</button><span class="pick">Kinetic</span>
+  </section>
+
+  <!-- 5 -->
+  <section class="tile o5" style="--bg:url('https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1100&q=70')">
+    <div class="tile-bg"></div><div class="tile-veil"></div>
+    <div class="tile-label"><div class="n">Option 05</div><div class="t">Spotlight</div><div class="d">A soft gold light drifts across the mark in the dark. Cinematic, courtroom-grave.</div></div>
+    <div class="stage"><div class="mk">
+      <img class="base" src="icon.png" alt="">
+      <img class="lit" src="icon.png" alt="">
+      <div class="glow" style="position:absolute;inset:0"></div>
+    </div></div>
+    <button class="fs">⤢ Fullscreen</button><span class="pick">Dramatic</span>
+  </section>
+
+</main>
+
+<script>
+  // apply tile backgrounds
+  document.querySelectorAll(".tile").forEach(t=>{
+    const bg=getComputedStyle(t).getPropertyValue("--bg").trim();
+    if(bg) t.querySelector(".tile-bg").style.backgroundImage=bg;
+  });
+  // fullscreen buttons
+  document.querySelectorAll(".fs").forEach(b=>b.addEventListener("click",e=>{
+    const tile=e.target.closest(".tile");
+    if(!document.fullscreenElement) tile.requestFullscreen?.(); else document.exitFullscreen?.();
+  }));
+  // parallax for option 2
+  const o2=document.querySelector(".o2 .mk");
+  if(o2){
+    const tile=document.querySelector(".o2");
+    let rx=0,ry=0,cx=0,cy=0;
+    tile.addEventListener("mousemove",e=>{const r=tile.getBoundingClientRect();
+      ry=((e.clientX-r.left)/r.width-.5)*34;rx=-((e.clientY-r.top)/r.height-.5)*34;});
+    tile.addEventListener("mouseleave",()=>{rx=0;ry=0;});
+    (function loop(){cx+=(rx-cx)*.08;cy+=(ry-cy)*.08;
+      o2.style.setProperty("--rx",cy.toFixed(2)+"deg");o2.style.setProperty("--ry",cx.toFixed(2)+"deg");
+      requestAnimationFrame(loop);})();
+  }
+</script>
+</body>
+</html>
