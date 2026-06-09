@@ -209,7 +209,7 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
 .cur{position:fixed;top:0;left:0;z-index:90;width:30px;height:30px;border:1px solid rgba(243,242,238,.7);
   pointer-events:none;transform:translate(-50%,-50%) rotate(45deg);mix-blend-mode:difference;
   transition:width .3s var(--ease),height .3s var(--ease),background .3s,opacity .3s}
-.cur.grow{width:56px;height:56px;background:rgba(243,242,238,.1)}
+.cur.grow{width:40px;height:40px;background:rgba(243,242,238,.1)}
 .curd{position:fixed;top:0;left:0;z-index:90;width:4px;height:4px;border-radius:50%;background:var(--paper);
   pointer-events:none;transform:translate(-50%,-50%);mix-blend-mode:difference}
 
@@ -276,14 +276,22 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
   .view-head{flex-direction:column;align-items:flex-start;gap:.55rem;margin-bottom:1.4rem}
   .view-tag{text-align:left;max-width:none}
 
-  /* PRACTICE: all ten areas on one screen — 2-up compact cards, titles only */
-  .view[data-view="practice"]{overflow:hidden}
+  /* PRACTICE: 2-up cards, titles by default — tap a card to reveal its copy */
+  .view[data-view="practice"]{display:block;overflow-y:auto}
   .view[data-view="practice"] .view-head{margin-bottom:1rem}
-  .grid{grid-template-columns:1fr 1fr;gap:1px}
-  .cell{min-height:0;padding:.9rem .9rem;backdrop-filter:none}
-  .cell .no{font-size:.5rem}
-  .cell h3{font-size:.82rem;line-height:1.15;margin:.4rem 0 0}
-  .cell p{display:none}
+  .grid{grid-template-columns:1fr;gap:1px}
+  .cell{min-height:0;padding:1rem 1.1rem;backdrop-filter:none;overflow:visible}
+  .cell .no{font-size:.52rem}
+  .cell h3{font-size:.92rem;line-height:1.15;margin:.4rem 0 0;
+    display:flex;align-items:center;justify-content:space-between;gap:1rem}
+  .cell h3::after{content:"+";font-family:"Archivo",sans-serif;font-weight:400;
+    color:var(--gold);font-size:1.1rem;line-height:1;transition:transform .35s var(--ease)}
+  .cell.open h3::after{transform:rotate(45deg)}
+  .cell p{display:block;font-size:.78rem;line-height:1.6;opacity:0;transform:none;
+    max-height:0;margin:0;overflow:hidden;transition:max-height .45s var(--ease),opacity .35s,margin .45s}
+  .cell.open{background:rgba(243,242,238,.06)}
+  .cell.open::before{width:100%}
+  .cell.open p{opacity:.85;max-height:16rem;margin-top:.6rem}
 
   .approach,.contact{grid-template-columns:1fr;gap:2rem}
   .approach-body{margin-top:1.4rem;max-width:none}
@@ -418,7 +426,7 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
         <div>
           <div class="kicker r" style="--d:.05s"><span class="ln"></span><span>Available 24 / 7 for arrests</span></div>
           <h2 class="contact-h r" style="--d:.14s">Let's talk,<br><span class="out">in confidence.</span></h2>
-          <p class="contact-sub r" style="--d:.26s">Your first call is confidential.</p>
+          <p class="contact-sub r" style="--d:.26s">Discretion, from the first call.</p>
           <div class="contact-cta r" style="--d:.36s"><a class="btn btn-primary" href="tel:+14166421438" data-cursor>Call 416.642.1438</a></div>
         </div>
         <dl class="dl">
@@ -470,6 +478,13 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
   const hint=document.getElementById("swipeHint");
   function hideHint(){if(hint)hint.style.display="none";}
   document.querySelectorAll("[data-go]").forEach(b=>b.addEventListener("click",()=>{go(b.dataset.go);hideHint();}));
+
+  // mobile: tap a Practice card to reveal/collapse its copy
+  if(mq.matches){
+    document.querySelectorAll('.view[data-view="practice"] .cell').forEach(c=>{
+      c.addEventListener("click",()=>c.classList.toggle("open"));
+    });
+  }
 
   // mobile: swipe left / right to page between the four views (vertical = internal scroll)
   let tsx=0,tsy=0;
