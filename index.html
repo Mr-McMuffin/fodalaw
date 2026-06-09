@@ -120,8 +120,8 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
 
 /* ----------  3D LOGO MARK  ---------- */
 .mark-stage{display:flex;align-items:center;justify-content:center;perspective:1300px;height:100%}
-/* the mix-blend mark composites through an inactive view — remove it entirely unless Home is active */
-.view[data-view="home"]:not(.active) .mark-stage{display:none}
+/* the mix-blend mark composites through an inactive view — hide it directly (keeps animating, no freeze on return) */
+.view[data-view="home"]:not(.active) .mark-stage{visibility:hidden}
 .mark-3d{width:min(38vh,400px);aspect-ratio:1;transform-style:preserve-3d;
   transform:rotateX(var(--rx,0deg)) rotateY(var(--ry,0deg));transition:transform .3s var(--ease);will-change:transform;cursor:none}
 .mark-float{width:100%;height:100%;animation:markFloat 10s ease-in-out infinite;transform-style:preserve-3d}
@@ -265,7 +265,7 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
 
   /* HOME: stacked text, then a smaller logo mark */
   .hero-h{font-size:clamp(1.85rem,7.6vw,2.7rem)}
-  .home-grid{grid-template-columns:1fr;height:auto;gap:1.5rem;align-content:center}
+  .home-grid{grid-template-columns:1fr;height:auto;gap:1.5rem;align-content:center;margin-top:-2.4rem}
   .mark-stage{display:flex;height:auto;order:-1;margin:0 0 .4rem;perspective:850px}
   .mark-3d{width:min(46vw,188px)}
   .hero-sub{margin-top:1.4rem}
