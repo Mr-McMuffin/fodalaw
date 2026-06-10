@@ -105,6 +105,8 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
 .kicker span{font-size:.62rem;letter-spacing:.44em;text-transform:uppercase;color:var(--gold)}
 .hero-h{font-family:"Archivo Expanded",sans-serif;font-weight:700;text-transform:uppercase;
   line-height:.96;letter-spacing:-.01em;font-size:clamp(2.3rem,5.1vw,5.1rem)}
+/* inline-block so the clip-path reveal covers the whole (possibly wrapped) phrase — no dropped words */
+.hero-h .r{display:inline-block}
 .hero-h .out{background:linear-gradient(168deg,#f6e7bf 0%,#cdaa6c 42%,#8d6f3a 60%,#ecd49a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .hero-sub{margin-top:2.1rem;max-width:42ch;color:var(--paper-dim);font-size:clamp(.92rem,1.15vw,1.05rem);line-height:1.65}
 .hero-cta{display:flex;gap:1.6rem;align-items:center;margin-top:2.8rem;flex-wrap:wrap}
@@ -154,8 +156,8 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
 /* ----------  PRACTICE  ---------- */
 .view-head{display:flex;align-items:flex-end;justify-content:space-between;gap:2rem;margin-bottom:2.6rem}
 .view-title{font-family:"Archivo Expanded",sans-serif;font-weight:700;text-transform:uppercase;
-  font-size:clamp(1.7rem,3.6vw,3.1rem);line-height:1;letter-spacing:-.01em}
-.view-tag{color:var(--paper-dim);font-size:.62rem;letter-spacing:.26em;text-transform:uppercase;text-align:right;max-width:26ch;line-height:2}
+  font-size:clamp(2.4rem,4.8vw,3.9rem);line-height:1;letter-spacing:-.01em}
+.view-tag{color:var(--paper-dim);font-size:.7rem;letter-spacing:.26em;text-transform:uppercase;text-align:right;max-width:28ch;line-height:1.9}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line)}
 .grp-label{font-size:.56rem;letter-spacing:.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1.1rem}
 .lang-label{margin-top:2.6rem}
@@ -179,7 +181,7 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
 /* ----------  APPROACH  ---------- */
 .approach{display:grid;grid-template-columns:1.1fr 1fr;gap:5rem;align-items:center}
 .approach-lead{font-family:"Archivo Expanded",sans-serif;font-weight:600;text-transform:uppercase;
-  font-size:clamp(1.5rem,2.9vw,2.6rem);line-height:1.16;letter-spacing:-.005em}
+  font-size:clamp(1.75rem,3.4vw,3.1rem);line-height:1.16;letter-spacing:-.005em}
 .approach-lead .out{background:linear-gradient(168deg,#f6e7bf 0%,#cdaa6c 42%,#8d6f3a 60%,#ecd49a 100%);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
 .approach-body{color:var(--paper-dim);font-size:.9rem;line-height:1.85;margin-top:1.9rem;max-width:50ch}
 .pillars{display:flex;flex-direction:column}
@@ -356,7 +358,7 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
           <div class="kicker r" style="--d:.05s"><span class="ln"></span><span>Criminal Lawyers · Toronto</span></div>
           <h1 class="hero-h">
             <span class="r" style="--d:.16s">Our reputation</span><br>
-            <span class="r out" style="--d:.28s">speaks</span> <span class="r" style="--d:.4s">for itself.</span>
+            <span class="r" style="--d:.3s"><span class="out">speaks</span> for itself.</span>
           </h1>
           <p class="hero-sub r" style="--d:.54s">Discreet. Relentless. Prepared.</p>
           <div class="hero-cta r" style="--d:.66s">
