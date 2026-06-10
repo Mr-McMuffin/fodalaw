@@ -250,12 +250,25 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
 
 /* ----------  RESPONSIVE  ---------- */
 @media(max-width:1080px){.mark-3d{width:min(32vh,300px)}}
-@media(max-width:980px){
-  body{cursor:auto}.cur,.curd{display:none}
-  .home-grid,.approach,.contact{grid-template-columns:1fr;gap:2.4rem}
-  .mark-stage{display:none}
+/* touch devices (any size): no custom cursor; Practice copy is always shown since there's no hover */
+@media(pointer:coarse){
+  body{cursor:auto}
+  .cur,.curd{display:none}
+  .cell p{opacity:1;transform:none}
+}
+/* tablet: keep the two-column deck and the logo mark, with a 2-up Practice grid */
+@media(min-width:761px) and (max-width:1024px){
+  .frame .lv{display:none}
+  .mark-3d{width:min(31vw,270px)}
+  .home-grid{gap:2.4rem}
   .grid{grid-template-columns:repeat(2,1fr)}
-  .frame .top,.frame .bot,.frame .lv{display:none}
+  .cell{min-height:0}
+  .approach{gap:3.2rem}
+  .contact{gap:3.2rem}
+  .view{padding:104px 40px 92px}
+  .view-head{margin-bottom:1.8rem}
+  /* Practice can be tall (4 cards + copy + languages) — let it scroll on short landscape */
+  .view[data-view="practice"]{justify-content:flex-start;overflow-y:auto;-webkit-overflow-scrolling:touch}
 }
 @media(max-width:760px){
   /* stays a four-page experience — swipe horizontally or tap the bottom tabs */
@@ -525,7 +538,6 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
   let tsx=0,tsy=0;
   window.addEventListener("touchstart",e=>{const t=e.changedTouches[0];tsx=t.clientX;tsy=t.clientY;},{passive:true});
   window.addEventListener("touchend",e=>{
-    if(!mq.matches)return;
     const t=e.changedTouches[0],dx=t.clientX-tsx,dy=t.clientY-tsy;
     if(Math.abs(dx)>55&&Math.abs(dx)>Math.abs(dy)*1.6){
       const i=order.indexOf(cur);
