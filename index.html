@@ -215,6 +215,26 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
 .curd{position:fixed;top:0;left:0;z-index:90;width:4px;height:4px;border-radius:50%;background:var(--paper);
   pointer-events:none;transform:translate(-50%,-50%);mix-blend-mode:difference}
 
+/* ----------  BUILD CREDIT  ---------- */
+.credit{position:fixed;left:50%;bottom:31px;transform:translateX(-50%);z-index:41;
+  display:inline-flex;align-items:center;gap:.6rem;cursor:none;text-decoration:none;white-space:nowrap;
+  font-family:"Archivo",sans-serif;font-size:.54rem;letter-spacing:.26em;text-transform:uppercase;
+  color:var(--paper-dimmer);transition:letter-spacing .5s var(--ease)}
+.credit .pre{opacity:.75;transition:color .45s var(--ease),opacity .45s}
+.credit .dot{width:5px;height:5px;border:1px solid var(--gold);transform:rotate(45deg);opacity:.45;
+  transition:opacity .45s,transform .6s var(--ease)}
+.credit .name{position:relative;font-weight:600;color:var(--paper-dim);
+  background-image:linear-gradient(110deg,#cdaa6c 0%,#f6e7bf 28%,#8d6f3a 52%,#ecd49a 78%,#cdaa6c 100%);
+  background-size:230% 100%;background-position:130% 0;-webkit-background-clip:text;background-clip:text;
+  transition:color .45s var(--ease),-webkit-text-fill-color .45s,background-position .9s var(--ease)}
+.credit .name::after{content:"";position:absolute;left:0;bottom:-3px;height:1px;width:100%;
+  background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .55s var(--ease)}
+.credit:hover,.credit.lit{letter-spacing:.32em;color:var(--gold)}
+.credit:hover .pre,.credit.lit .pre{opacity:1;color:var(--gold)}
+.credit:hover .dot,.credit.lit .dot{opacity:1;transform:rotate(225deg)}
+.credit:hover .name,.credit.lit .name{color:transparent;-webkit-text-fill-color:transparent;background-position:-30% 0}
+.credit:hover .name::after,.credit.lit .name::after{transform:scaleX(1)}
+
 /* ----------  LOADER  ---------- */
 .loader{position:fixed;inset:0;z-index:200;background:var(--ink);display:flex;align-items:center;justify-content:center;flex-direction:column;
   transition:opacity .9s var(--ease),visibility .9s}
@@ -303,10 +323,13 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
   /* touch polish: no tap-flash, no double-tap zoom, lighter compositing */
   .btn,.nav-link,.tel,.brand,.cell,a{-webkit-tap-highlight-color:transparent;touch-action:manipulation}
   .scan{opacity:.22}
+
+  /* build credit floats just above the tab bar */
+  .credit{bottom:calc(50px + env(safe-area-inset-bottom));font-size:.5rem;letter-spacing:.22em}
 }
 /* hint that the deck pages sideways on touch */
 @media(max-width:760px) and (pointer:coarse){
-  .swipe-hint{position:absolute;left:50%;bottom:calc(64px + env(safe-area-inset-bottom));
+  .swipe-hint{position:absolute;left:50%;bottom:calc(98px + env(safe-area-inset-bottom));
     transform:translateX(-50%);z-index:39;font-size:.5rem;letter-spacing:.3em;text-transform:uppercase;
     color:var(--paper-dimmer);pointer-events:none;display:flex;align-items:center;gap:.5rem;
     opacity:.7;animation:hintFade 5s ease forwards}
@@ -450,6 +473,7 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
   </nav>
   <div class="pager"><b id="pgNow">01</b> / 04</div>
   <div class="swipe-hint" id="swipeHint"><span>‹</span> Swipe <span>›</span></div>
+  <a class="credit" id="credit" data-cursor aria-label="Built by Smola Designs"><span class="pre">Built by</span><span class="dot"></span><span class="name">Smola Designs</span></a>
 </main>
 
 <script>
@@ -486,6 +510,15 @@ nav.dock{position:absolute;left:48px;bottom:0;z-index:40;display:flex;padding-bo
     document.querySelectorAll('.view[data-view="practice"] .cell').forEach(c=>{
       c.addEventListener("click",()=>c.classList.toggle("open"));
     });
+  }
+
+  // build credit: plays the gold-shine effect on tap (touch has no hover)
+  const credit=document.getElementById("credit");
+  if(credit){
+    credit.addEventListener("touchstart",()=>{
+      credit.classList.add("lit");
+      clearTimeout(credit._t);credit._t=setTimeout(()=>credit.classList.remove("lit"),2400);
+    },{passive:true});
   }
 
   // mobile: swipe left / right to page between the four views (vertical = internal scroll)
